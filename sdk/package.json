@@ -1,0 +1,22 @@
+{
+  "name": "@sentinel/observability",
+  "version": "0.1.0",
+  "description": "Tenant-aware observability middleware for Express",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "express": "^5.0.0"
+  }
+}
