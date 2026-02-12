@@ -4,7 +4,8 @@
     "dev": "tsx service.ts"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { eventBuffer } from '../storage/eventBuffer.js'
+import { eventBuffer } from '../storage/eventBuffer.factory.js'
 
 const router = Router()
 
 // POST /api/v1/events — receive request events from SDK middleware
-router.post('/api/v1/events', (req, res) => {
+router.post('/api/v1/events', async (req, res) => {
   const event = req.body
 
   if (!event?.tenant_id || !event?.timestamp || !event?.endpoint) {
@@ -19,9 +19,13 @@ router.post('/api/v1/events', (req, res) => {
   )
 
   // Store event in buffer
-  eventBuffer.addEvent(event)
-
-  res.status(201).json({ status: 'received' })
+  try {
+    await eventBuffer.addEvent(event)
+    res.status(201).json({ status: 'received' })
+  } catch (error) {
+    console.error('[Ingestion] Failed to add event:', error)
+    res.status(500).json({ error: 'Failed to store event' })
+  }
 })
 
 export default router

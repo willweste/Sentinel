@@ -13,7 +13,7 @@ export interface StoredEvent {
   service: string
 }
 
-class EventBuffer {
+export class EventBuffer {
   private events: StoredEvent[] = []
   private retentionMs: number
   private cleanupIntervalMs: number

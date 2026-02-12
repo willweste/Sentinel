@@ -2,7 +2,8 @@
  * Aggregation engine for computing tenant-level error and latency metrics
  */
 
-import { eventBuffer, StoredEvent } from '../storage/eventBuffer.js'
+import { eventBuffer } from '../storage/eventBuffer.factory.js'
+import type { StoredEvent } from '../storage/eventBuffer.js'
 import { TenantErrorMetrics, TenantLatencyMetrics } from './types.js'
 
 /**
@@ -57,11 +58,11 @@ function calculateP95(sortedLatencies: number[]): number {
  * Aggregate error metrics by tenant
  * Returns tenants ranked by error rate (highest first)
  */
-export function aggregateErrorMetrics(
+export async function aggregateErrorMetrics(
   windowMinutes: number,
   limit: number
-): TenantErrorMetrics[] {
-  const events = eventBuffer.getEventsInWindow(windowMinutes)
+): Promise<TenantErrorMetrics[]> {
+  const events = await eventBuffer.getEventsInWindow(windowMinutes)
 
   // No events in window
   if (events.length === 0) {
@@ -102,11 +103,11 @@ export function aggregateErrorMetrics(
  * Aggregate latency metrics by tenant
  * Returns tenants ranked by P95 latency (highest first)
  */
-export function aggregateLatencyMetrics(
+export async function aggregateLatencyMetrics(
   windowMinutes: number,
   limit: number
-): TenantLatencyMetrics[] {
-  const events = eventBuffer.getEventsInWindow(windowMinutes)
+): Promise<TenantLatencyMetrics[]> {
+  const events = await eventBuffer.getEventsInWindow(windowMinutes)
 
   // No events in window
   if (events.length === 0) {
