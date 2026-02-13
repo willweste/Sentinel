@@ -7,14 +7,19 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "typescript": "^5.9.3"
+    "@vitest/ui": "^4.0.18",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
     "express": "^5.0.0"

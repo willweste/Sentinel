@@ -4,7 +4,16 @@
  */
 
 import { getRedisClient } from '../redis/client.js'
-import type { StoredEvent } from './eventBuffer.js'
+
+export interface StoredEvent {
+  timestamp: string
+  tenant_id: string
+  endpoint: string
+  method: string
+  status_code: number
+  latency_ms: number
+  service: string
+}
 
 export class RedisEventBuffer {
   private redis: Awaited<ReturnType<typeof getRedisClient>>
@@ -183,3 +192,6 @@ export class RedisEventBuffer {
     }
   }
 }
+
+// Singleton instance with 15-minute retention
+export const eventBuffer = new RedisEventBuffer(15, 1)

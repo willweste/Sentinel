@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { eventBuffer } from '../storage/eventBuffer.factory.js'
+import { eventBuffer } from '../storage/redisEventBuffer.js'
 
 const router = Router()
 

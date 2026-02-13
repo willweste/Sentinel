@@ -2,8 +2,7 @@
  * Aggregation engine for computing tenant-level error and latency metrics
  */
 
-import { eventBuffer } from '../storage/eventBuffer.factory.js'
-import type { StoredEvent } from '../storage/eventBuffer.js'
+import { eventBuffer, type StoredEvent } from '../storage/redisEventBuffer.js'
 import { TenantErrorMetrics, TenantLatencyMetrics } from './types.js'
 
 /**
